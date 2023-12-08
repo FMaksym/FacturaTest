@@ -6,6 +6,7 @@ public class EnemyVFX : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] private ParticleSystem _bloodParticle;
 
+    private float _flashDuration = 0.2f;
     private Material _originalMaterial;
     private EnemyHealth _enemyHealth;
 
@@ -25,8 +26,6 @@ public class EnemyVFX : MonoBehaviour
 
     private void FlashEffect()
     {
-        float flashDuration = 0.25f;
-
         Material materialCopy = new (_originalMaterial);
 
         _skinnedMeshRenderer.material = materialCopy;
@@ -37,7 +36,8 @@ public class EnemyVFX : MonoBehaviour
 
         _bloodParticle.gameObject.SetActive(true);
         _bloodParticle.Play();
-        StartCoroutine(RestoreMaterial(flashDuration, originalColor, _skinnedMeshRenderer, materialCopy, _originalMaterial));
+        StartCoroutine(RestoreMaterial(_flashDuration, originalColor, _skinnedMeshRenderer, materialCopy, _originalMaterial));
+        _bloodParticle.gameObject.SetActive(false);
     }
 
     private IEnumerator RestoreMaterial(float flashDuration, Color originalColor, SkinnedMeshRenderer skinnedMeshRenderer, Material materialCopy, Material originalMaterial)

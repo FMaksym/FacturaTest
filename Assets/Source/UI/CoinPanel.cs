@@ -11,7 +11,7 @@ public class CoinPanel : MonoBehaviour
         CoinManager.AddCoin += RefreshCoinText;
     }
 
-    private void Awake()
+    private void Start()
     {
         RefreshCoinText();
     }

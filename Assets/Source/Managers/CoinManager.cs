@@ -8,7 +8,7 @@ public class CoinManager : MonoBehaviour
     private const string CoinKey = "PlayerCoins";
     private int _currentCoins;
 
-    private void Start()
+    private void Awake()
     {
         LoadCoins();
     }

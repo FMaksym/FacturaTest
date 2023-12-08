@@ -4,7 +4,7 @@ using Zenject;
 
 public class CarDriveProgress : MonoBehaviour
 {
-    public GameObject finisGamePoint;
+    public GameObject finishGamePoint;
     public Slider progressSlider;
 
     private Vector3 _startPoint;
@@ -15,10 +15,10 @@ public class CarDriveProgress : MonoBehaviour
     private void Start()
     {
         _startPoint = transform.position;
-        _endPoint = finisGamePoint.transform.position;
+        _endPoint = finishGamePoint.transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_gameManager.IsGame())
         {

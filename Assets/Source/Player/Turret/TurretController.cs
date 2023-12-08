@@ -11,7 +11,7 @@ public class TurretController : MonoBehaviour
 
     [Inject] private GameManager _gameManager;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_gameManager.IsGame())
         {
