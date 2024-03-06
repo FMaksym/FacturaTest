@@ -5,15 +5,16 @@ using UnityEngine;
 public class FrameRateManager : MonoBehaviour
 {
     [Header("Frame Settings")]
-    [SerializeField] private int MaxRate = 9999;
-    [SerializeField] private float TargetFrameRate = 60.0f;
-    [SerializeField] private float currentFrameTime;
+    [SerializeField] private float _targetFrameRate = 120.0f;
+
+    private int _maxRate = 9999;
+    private float _currentFrameTime;
 
     void Awake()
     {
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = MaxRate;
-        currentFrameTime = Time.realtimeSinceStartup;
+        Application.targetFrameRate = _maxRate;
+        _currentFrameTime = Time.realtimeSinceStartup;
         StartCoroutine(nameof(WaitForNextFrame));
     }
 
@@ -22,12 +23,12 @@ public class FrameRateManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForEndOfFrame();
-            currentFrameTime += 1.0f / TargetFrameRate;
+            _currentFrameTime += 1.0f / _targetFrameRate;
             var t = Time.realtimeSinceStartup;
-            var sleepTime = currentFrameTime - t - 0.01f;
+            var sleepTime = _currentFrameTime - t - 0.01f;
             if (sleepTime > 0)
                 Thread.Sleep((int)(sleepTime * 1000));
-            while (t < currentFrameTime)
+            while (t < _currentFrameTime)
                 t = Time.realtimeSinceStartup;
         }
     }

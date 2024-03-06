@@ -5,7 +5,7 @@ public class CarMovement : MonoBehaviour
 {
     [SerializeField] private float _carSpeed = 5.0f;
 
-    private bool IsStop;
+    private bool _IsStop;
 
     [Inject] private GameManager _gameManager;
 
@@ -24,7 +24,7 @@ public class CarMovement : MonoBehaviour
 
     private void Move()
     {
-        if (!IsStop)
+        if (!_IsStop)
         {
             transform.Translate(Vector3.forward * _carSpeed * Time.deltaTime);
         }
@@ -32,6 +32,6 @@ public class CarMovement : MonoBehaviour
 
     private void Stop()
     {
-        IsStop = true;
+        _IsStop = true;
     }
 }

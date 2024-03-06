@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     private EnemyDamageTextActivate _enemyDamageText;
     private CoinTextActivate _coinText;
-    private EnemyHealth enemyHealth;
+    private EnemyHealth _enemyHealth;
 
     private void OnEnable()
     {
@@ -39,15 +39,15 @@ public class Bullet : MonoBehaviour
     {
         _enemyDamageText.ActivateText(transform.position + new Vector3(0, 2, 0), _bulletDamage);
 
-        enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
+        _enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+        if (_enemyHealth != null)
         {
-            enemyHealth.EnemyDieFromBullets += KillEnemy;
+            _enemyHealth.EnemyDieFromBullets += KillEnemy;
         }
     }
 
     private void KillEnemy()
     {
-        _coinText.ActivateText(enemyHealth.transform, _addCoinValue);
+        _coinText.ActivateText(_enemyHealth.transform, _addCoinValue);
     }
 }

@@ -6,12 +6,12 @@ public class TurretController : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 5.0f;
     [SerializeField] private float _rotationAngle = 45.0f;
 
-    private bool IsRotating = false;
+    private bool _IsRotating = false;
     private Vector2 _startTouchPosition;
 
     [Inject] private GameManager _gameManager;
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_gameManager.IsGame())
         {
@@ -44,13 +44,13 @@ public class TurretController : MonoBehaviour
 
     private void StartRotation(Vector2 touchPosition)
     {
-        IsRotating = true;
+        _IsRotating = true;
         _startTouchPosition = touchPosition;
     }
 
     private void ContinueRotation(Vector2 touchPosition)
     {
-        if (IsRotating)
+        if (_IsRotating)
         {
             float rotationAmount = (touchPosition.x - _startTouchPosition.x) * _rotationSpeed * Time.deltaTime;
             RotateTurret(rotationAmount);
@@ -60,7 +60,7 @@ public class TurretController : MonoBehaviour
 
     private void StopRotation()
     {
-        IsRotating = false;
+        _IsRotating = false;
     }
 
     private void RotateTurret(float amount)

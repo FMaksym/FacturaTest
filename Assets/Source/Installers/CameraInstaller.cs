@@ -3,10 +3,10 @@ using Zenject;
 
 public class CameraInstaller : MonoInstaller
 {
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private Camera _playerCamera;
 
     public override void InstallBindings()
     {
-        Container.Bind<Camera>().FromInstance(playerCamera).AsSingle();
+        Container.Bind<Camera>().FromInstance(_playerCamera).AsSingle();
     }
 }

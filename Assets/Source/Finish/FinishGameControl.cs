@@ -8,14 +8,14 @@ public class FinishGameControl : MonoBehaviour
 
     [SerializeField] private float _finishRadius;
 
-    private bool isPlayerInRange;
+    private bool _IsPlayerInRange;
 
     [Inject] private GameManager _gameManager;
 
     private void Update()
     {
         FindPlayer();
-        if (isPlayerInRange)
+        if (_IsPlayerInRange)
         {
             FinishGame?.Invoke();
             _gameManager.GameOver();
@@ -24,13 +24,13 @@ public class FinishGameControl : MonoBehaviour
 
     private void FindPlayer()
     {
-        isPlayerInRange = false;
+        _IsPlayerInRange = false;
         Collider[] colliders = Physics.OverlapSphere(transform.position, _finishRadius);
         foreach (Collider collider in colliders)
         {
             if (collider.GetComponent<CarHealth>())
             {
-                isPlayerInRange = true;
+                _IsPlayerInRange = true;
             }
         }
     }
